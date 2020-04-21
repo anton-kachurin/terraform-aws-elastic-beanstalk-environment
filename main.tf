@@ -330,86 +330,86 @@ locals {
   tags = { for t in keys(module.label.tags) : t => module.label.tags[t] if t != "Name" && t != "Namespace" }
 
   elb_settings = [
-    {
-      namespace = "aws:elb:loadbalancer"
-      name      = "CrossZone"
-      value     = "true"
-    },
+    # {
+    #   namespace = "aws:elb:loadbalancer"
+    #   name      = "CrossZone"
+    #   value     = "true"
+    # },
     {
       namespace = "aws:ec2:vpc"
       name      = "ELBSubnets"
       value     = join(",", var.loadbalancer_subnets)
     },
-    {
-      namespace = "aws:elb:loadbalancer"
-      name      = "SecurityGroups"
-      value     = join(",", var.loadbalancer_security_groups)
-    },
-    {
-      namespace = "aws:elb:loadbalancer"
-      name      = "ManagedSecurityGroup"
-      value     = var.loadbalancer_managed_security_group
-    },
-    {
-      namespace = "aws:elb:listener"
-      name      = "ListenerProtocol"
-      value     = "HTTP"
-    },
-    {
-      namespace = "aws:elb:listener"
-      name      = "InstancePort"
-      value     = var.application_port
-    },
-    {
-      namespace = "aws:elb:listener"
-      name      = "ListenerEnabled"
-      value     = var.http_listener_enabled || var.loadbalancer_certificate_arn == "" ? "true" : "false"
-    },
-    {
-      namespace = "aws:elb:listener:443"
-      name      = "ListenerProtocol"
-      value     = "HTTPS"
-    },
-    {
-      namespace = "aws:elb:listener:443"
-      name      = "InstancePort"
-      value     = var.application_port
-    },
-    {
-      namespace = "aws:elb:listener:443"
-      name      = "SSLCertificateId"
-      value     = var.loadbalancer_certificate_arn
-    },
-    {
-      namespace = "aws:elb:listener:443"
-      name      = "ListenerEnabled"
-      value     = var.loadbalancer_certificate_arn == "" ? "false" : "true"
-    },
-    {
-      namespace = "aws:elb:listener:${var.ssh_listener_port}"
-      name      = "ListenerProtocol"
-      value     = "TCP"
-    },
-    {
-      namespace = "aws:elb:listener:${var.ssh_listener_port}"
-      name      = "InstancePort"
-      value     = "22"
-    },
-    {
-      namespace = "aws:elb:listener:${var.ssh_listener_port}"
-      name      = "ListenerEnabled"
-      value     = var.ssh_listener_enabled
-    },
-    {
-      namespace = "aws:elb:policies"
-      name      = "ConnectionSettingIdleTimeout"
-      value     = var.ssh_listener_enabled ? "3600" : "60"
-    },
-    {
-      namespace = "aws:elb:policies"
-      name      = "ConnectionDrainingEnabled"
-      value     = "true"
-    },
+    # {
+    #   namespace = "aws:elb:loadbalancer"
+    #   name      = "SecurityGroups"
+    #   value     = join(",", var.loadbalancer_security_groups)
+    # },
+    # {
+    #   namespace = "aws:elb:loadbalancer"
+    #   name      = "ManagedSecurityGroup"
+    #   value     = var.loadbalancer_managed_security_group
+    # },
+    # {
+    #   namespace = "aws:elb:listener"
+    #   name      = "ListenerProtocol"
+    #   value     = "HTTP"
+    # },
+    # {
+    #   namespace = "aws:elb:listener"
+    #   name      = "InstancePort"
+    #   value     = var.application_port
+    # },
+    # {
+    #   namespace = "aws:elb:listener"
+    #   name      = "ListenerEnabled"
+    #   value     = var.http_listener_enabled || var.loadbalancer_certificate_arn == "" ? "true" : "false"
+    # },
+    # {
+    #   namespace = "aws:elb:listener:443"
+    #   name      = "ListenerProtocol"
+    #   value     = "HTTPS"
+    # },
+    # {
+    #   namespace = "aws:elb:listener:443"
+    #   name      = "InstancePort"
+    #   value     = var.application_port
+    # },
+    # {
+    #   namespace = "aws:elb:listener:443"
+    #   name      = "SSLCertificateId"
+    #   value     = var.loadbalancer_certificate_arn
+    # },
+    # {
+    #   namespace = "aws:elb:listener:443"
+    #   name      = "ListenerEnabled"
+    #   value     = var.loadbalancer_certificate_arn == "" ? "false" : "true"
+    # },
+    # {
+    #   namespace = "aws:elb:listener:${var.ssh_listener_port}"
+    #   name      = "ListenerProtocol"
+    #   value     = "TCP"
+    # },
+    # {
+    #   namespace = "aws:elb:listener:${var.ssh_listener_port}"
+    #   name      = "InstancePort"
+    #   value     = "22"
+    # },
+    # {
+    #   namespace = "aws:elb:listener:${var.ssh_listener_port}"
+    #   name      = "ListenerEnabled"
+    #   value     = var.ssh_listener_enabled
+    # },
+    # {
+    #   namespace = "aws:elb:policies"
+    #   name      = "ConnectionSettingIdleTimeout"
+    #   value     = var.ssh_listener_enabled ? "3600" : "60"
+    # },
+    # {
+    #   namespace = "aws:elb:policies"
+    #   name      = "ConnectionDrainingEnabled"
+    #   value     = "true"
+    # },
     {
       namespace = "aws:elbv2:loadbalancer"
       name      = "AccessLogsS3Bucket"
@@ -646,17 +646,17 @@ resource "aws_elastic_beanstalk_environment" "default" {
     value     = var.root_volume_type
   }
 
-  setting {
-    namespace = "aws:elasticbeanstalk:command"
-    name      = "BatchSizeType"
-    value     = "Fixed"
-  }
+  # setting {
+  #   namespace = "aws:elasticbeanstalk:command"
+  #   name      = "BatchSizeType"
+  #   value     = "Fixed"
+  # }
 
-  setting {
-    namespace = "aws:elasticbeanstalk:command"
-    name      = "BatchSize"
-    value     = "1"
-  }
+  # setting {
+  #   namespace = "aws:elasticbeanstalk:command"
+  #   name      = "BatchSize"
+  #   value     = "1"
+  # }
 
   setting {
     namespace = "aws:elasticbeanstalk:managedactions"
