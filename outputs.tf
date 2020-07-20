@@ -28,6 +28,10 @@ output "ec2_instance_profile_role_name" {
   description = "Instance IAM role name"
 }
 
+output "ec2_role" {
+  value = aws_iam_role.ec2
+}
+
 output "tier" {
   description = "The environment tier"
   value       = aws_elastic_beanstalk_environment.default.tier
